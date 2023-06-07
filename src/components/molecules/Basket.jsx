@@ -1,5 +1,7 @@
-import { Dropdown } from "flowbite-react";
+import { Badge, Button, Dropdown } from "flowbite-react";
 import { useState } from "react";
+import imgitem from '../../images/image-product-1.jpg'
+import icondelete from '../../images/icon-delete.svg'
 
 export default function Basket() {
   const [bcolor, setBcolor] = useState("#69707D");
@@ -8,7 +10,11 @@ export default function Basket() {
       arrowIcon={false}
       inline
       label={
-        <svg
+        <div className="relative">
+          <Badge color="info" className="px-[8px] py-[1px] text-[10px] absolute -top-3 -right-3 rounded-full bg-ui-orange text-white">
+            3
+          </Badge>
+          <svg
           onMouseEnter={() => setBcolor("hsl(220, 13%, 13%)")}
           onMouseLeave={() => setBcolor("#69707D")}
           width="22"
@@ -21,14 +27,26 @@ export default function Basket() {
             fillRule="nonzero"
           />
         </svg>
+        </div>
       }
+      className="max-md:w-[95%] rounded-lg shadow-lg border-none"
     >
-      <Dropdown.Header>
-        <span>Cart</span>
+      <Dropdown.Header className="font-bold py-3">
+        <h1>Cart</h1>
       </Dropdown.Header>
-      <Dropdown.Item>Item</Dropdown.Item>
-      <Dropdown.Divider />
-      <Dropdown.Item>CheckOut</Dropdown.Item>
+      <div className="px-5 py-4 flex gap-4 items-center">
+        <img className="rounded" src={imgitem} alt="img product" width={50} height={50} />
+        <div className="text-ui-dark-grayish-blue">
+          <p>Fall Limited Edition Sneakers</p>
+          <p>$125.00 x 3 <span className="font-bold text-ui-very-dark-blue">$375.00</span></p>
+        </div>
+        <button>
+          <img className="hover:contrast-50" src={icondelete} alt="delete icon" />
+        </button>
+      </div>
+      <div className="px-5 py-3">
+        <Button className="py-1 w-full bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-xs [&>span]:font-bold">CheckOut</Button>
+      </div>
     </Dropdown>
   );
 }
