@@ -4,7 +4,7 @@ export default function CloseButton({ ...props }) {
   const [bcolor, setBcolor] = useState("#69707D");
   return (
     <button
-      onMouseEnter={() => setBcolor("hsl(220, 13%, 13%)")}
+      onMouseEnter={() => setBcolor("hsl(26, 100%, 55%)")}
       onMouseLeave={() => setBcolor("#69707D")}
       {...props}
     >
