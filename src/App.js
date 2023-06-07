@@ -1,8 +1,11 @@
-import UINavbar from "./components/organisms/UINavbar";
+import Product from "./components/pages/Product";
+import Layout from "./components/templates/Layout"
 
 function App() {
   return (
-    <UINavbar/>
+    <Layout>
+      <Product/>
+    </Layout>
   );
 }
 
