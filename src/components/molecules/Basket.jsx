@@ -42,7 +42,7 @@ export default function Basket() {
           </svg>
         </div>
       }
-      className="max-md:w-[95%] rounded-lg shadow-lg border-none dropdown-basket"
+      className="w-[325px] max-md:w-[95%] rounded-lg shadow-lg border-none dropdown-basket"
     >
       <Dropdown.Header className="font-bold py-3">
         <h1>Cart</h1>
