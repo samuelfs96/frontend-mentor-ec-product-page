@@ -1,14 +1,16 @@
 import { Avatar, Navbar } from "flowbite-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Logo from "../atoms/Logo";
 import Basket from "../molecules/Basket";
 import logo_src from "../../images/logo.svg";
 import avatar_src from "../../images/image-avatar.png";
 import CloseButton from "../atoms/CloseButton";
+import GlobalStateContext from "../../store/context/GlobalStateContext";
 
 const Links = ["Collections", "Men", "Women", "About", "Contact"];
 
 export default function UINavbar() {
+  const dispatch = useContext(GlobalStateContext)[1];
   const [activeMenu, setActiveMenu] = useState(false);
   const handleActiveMenu = () => {
     const menu = document.querySelector(
@@ -17,12 +19,20 @@ export default function UINavbar() {
     menu.classList.toggle("hidden");
     if (![...menu.classList].includes("hidden")) {
       setActiveMenu(true);
+      dispatch({
+        type: "hidecarouselzindex",
+        zindexhidden: true,
+      });
       setTimeout(() => {
         menu.classList.remove("max-md:-translate-x-full");
       }, 100);
     } else {
       menu.classList.add("max-md:-translate-x-full");
       setActiveMenu(false);
+      dispatch({
+        type: "hidecarouselzindex",
+        zindexhidden: false,
+      });
     }
   };
   return (
