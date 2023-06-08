@@ -5,8 +5,8 @@ import CloseButton from "../atoms/CloseButton";
 const customTheme = {
   indicators: {
     wrapper:
-      "absolute -bottom-24 max-md:-bottom-16 left-1/2 flex -translate-x-1/2 space-x-3",
-    base: "w-[75px] h-[75px] max-md:w-[50px] max-md:h-[50px] rounded-xl bg-ui-pale-orange indicators bg-contain",
+      "absolute -bottom-24 max-md:-bottom-16 left-1/2 flex -translate-x-1/2 space-x-3 max-md:hidden",
+    base: "w-[75px] h-[75px] rounded-xl bg-ui-pale-orange indicators bg-contain",
     active: {
       on: "opacity-25 border-ui-orange border-2",
       off: "opacity-100",
