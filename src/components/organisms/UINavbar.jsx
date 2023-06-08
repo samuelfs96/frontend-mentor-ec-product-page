@@ -36,7 +36,7 @@ export default function UINavbar() {
     }
   };
   return (
-    <div className="bg-white fixed w-full top-0 left-0 right-0 container mx-auto min-[1024px]:px-24">
+    <div className="bg-white fixed w-full top-0 left-0 right-0 z-20 container mx-auto min-[1024px]:px-24 max-md:shadow-sm">
       <Navbar
         fluid
         className="border-b border-ui-grayish-blue border-opacity-30 md:pb-0 md:pt-0"
