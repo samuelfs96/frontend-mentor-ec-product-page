@@ -16,7 +16,6 @@ export default function Basket() {
   };
   return (
     <Dropdown
-      id="dropdown-basket"
       arrowIcon={false}
       inline
       label={
