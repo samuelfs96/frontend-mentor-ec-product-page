@@ -8,16 +8,25 @@ export default function ProductDetail() {
   const [productCount, setProductCount] = useState(0);
   const handleAdd = () => {
     setProductCount((count) => {
-        if(count < MAXIMUM_QUANTITY) return count + 1;
-        return count
+      if (count < MAXIMUM_QUANTITY) return count + 1;
+      return count;
     });
   };
   const handleReduce = () => {
     setProductCount((count) => {
       if (count > 0) return count - 1;
-      return 0
+      return 0;
     });
   };
+  const handleOnchangeValue = (ev) => {
+    setProductCount((v) =>
+      ev.target.validity.valid &&
+      parseInt(ev.target.value || 0) <= MAXIMUM_QUANTITY
+        ? parseInt(ev.target.value || 0)
+        : parseInt(v)
+    );
+  };
+  
   return (
     <div className="p-8">
       <h4 className="mb-4 uppercase text-ui-orange font-bold text-sm tracking-[.075rem]">
@@ -46,13 +55,7 @@ export default function ProductDetail() {
           <input
             pattern="^[0-9]*$"
             className="font-bold w-12 text-center bg-transparent focus:outline-none"
-            onChange={(ev) =>
-              setProductCount((v) =>
-                ev.target.validity.valid && parseInt(ev.target.value || 0) <= MAXIMUM_QUANTITY
-                  ? parseInt(ev.target.value || 0)
-                  : parseInt(v)
-              )
-            }
+            onChange={handleOnchangeValue}
             value={productCount}
           ></input>
           <button className="p-1 hover:opacity-50" onClick={handleAdd}>
