@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export default function CloseButton({ ...props }) {
-  const [bcolor, setBcolor] = useState("#69707D");
+export default function CloseButton({ customColor, ...props }) {
+  const [bcolor, setBcolor] = useState(customColor || "#69707D");
   return (
     <button
       onMouseEnter={() => setBcolor("hsl(26, 100%, 55%)")}
-      onMouseLeave={() => setBcolor("#69707D")}
+      onMouseLeave={() => setBcolor(customColor || "#69707D")}
       {...props}
     >
       <svg width="14" height="15" xmlns="http://www.w3.org/2000/svg">
