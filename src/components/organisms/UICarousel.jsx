@@ -1,6 +1,8 @@
 import { Carousel, Modal } from "flowbite-react";
 import React, { useEffect, useState } from "react";
 import CloseButton from "../atoms/CloseButton";
+import PrevButton from "../atoms/PrevButton";
+import NextButton from "../atoms/NextButton";
 
 const customTheme = {
   indicators: {
@@ -36,6 +38,8 @@ export default function UICarousel({ images }) {
         slide={false}
         className="max-md:[&>div]:rounded-none"
         theme={customTheme}
+        leftControl={<PrevButton />}
+        rightControl={<NextButton />}
       >
         {images.map((image, index) => (
           <img
@@ -59,7 +63,13 @@ export default function UICarousel({ images }) {
             onClick={() => setOpenLightBox(false)}
           />
           <div className="h-[400px]">
-            <Carousel id="lightbox-carousel" slide={false} theme={customTheme}>
+            <Carousel
+              id="lightbox-carousel"
+              slide={false}
+              theme={customTheme}
+              leftControl={<PrevButton onLightBox />}
+              rightControl={<NextButton onLightBox />}
+            >
               {images.map((image, index) => (
                 <img key={index} alt={`img of item ${index}`} src={image} />
               ))}
