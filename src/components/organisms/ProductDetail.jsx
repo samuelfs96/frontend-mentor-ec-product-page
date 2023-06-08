@@ -26,7 +26,7 @@ export default function ProductDetail() {
         : parseInt(v)
     );
   };
-  
+
   return (
     <div className="p-8">
       <h4 className="mb-4 uppercase text-ui-orange font-bold text-sm tracking-[.075rem]">
@@ -40,15 +40,17 @@ export default function ProductDetail() {
         Featuring a durable rubber outer sole, they’ll withstand everything the
         weather can offer.
       </p>
-      <h2 className="mb-2 text-3xl text-ui-very-dark-blue font-bold flex items-center gap-3">
-        <span>$125.00</span>
-        <Badge className="bg-ui-pale-orange text-ui-orange px-[8px]">
-          <span className="text-sm">50%</span>
-        </Badge>
-      </h2>
-      <span className="text-ui-grayish-blue line-through">$250.00</span>
-      <div className="px-4 flex justify-center items-center gap-4 mt-6">
-        <div className="flex-[2] my-2 bg-ui-light-grayish-blue rounded-lg p-[.95rem] flex justify-between items-center gap-2">
+      <div className="flex flex-col max-md:flex-row max-md:items-center max-md:justify-between">
+        <h2 className="mb-2 text-3xl text-ui-very-dark-blue font-bold flex items-center gap-3">
+          <span>$125.00</span>
+          <Badge className="bg-ui-pale-orange text-ui-orange px-[8px]">
+            <span className="text-sm">50%</span>
+          </Badge>
+        </h2>
+        <span className="text-ui-grayish-blue line-through font-bold max-md:text-lg">$250.00</span>
+      </div>
+      <div className="px-4 flex justify-center items-center max-md:flex-col max-md:gap-1 gap-4 mt-8">
+        <div className="max-md:w-full flex-[2] my-2 bg-ui-light-grayish-blue rounded-lg p-[.95rem] flex justify-between items-center gap-2">
           <button className="p-1 hover:opacity-50" onClick={handleReduce}>
             <img src={minus_src} alt="minus logo" />
           </button>
@@ -62,7 +64,7 @@ export default function ProductDetail() {
             <img src={plus_src} alt="plus logo" />
           </button>
         </div>
-        <Button className="shadow-xl shadow-ui-pale-orange flex-[4] py-[.5rem] bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-md [&>span]:font-bold">
+        <Button className="max-md:w-full shadow-xl shadow-ui-pale-orange flex-[4] py-[.5rem] bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-md [&>span]:font-bold">
           <svg
             className="mr-2"
             width="22"
