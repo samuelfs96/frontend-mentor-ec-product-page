@@ -14,6 +14,7 @@ export default function Basket() {
       zindexhidden: [...menu.classList].includes("opacity-0"),
     });
   };
+  console.log(state)
   return (
     <Dropdown
       arrowIcon={false}

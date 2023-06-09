@@ -1,11 +1,29 @@
 import { Badge, Button } from "flowbite-react";
 import minus_src from "../../images/icon-minus.svg";
 import plus_src from "../../images/icon-plus.svg";
-import React, { useState } from "react";
+import React, { useContext, useMemo, useState } from "react";
+import GlobalStateContext from "../../store/context/GlobalStateContext";
 
 const MAXIMUM_QUANTITY = 100;
-export default function ProductDetail() {
+export default function ProductDetail({
+  id,
+  image,
+  companyname,
+  title,
+  description,
+  price,
+  discount,
+}) {
+  const [state, dispatch] = useContext(GlobalStateContext);
   const [productCount, setProductCount] = useState(0);
+
+  const discounted_amount = useMemo(
+    () =>
+      discount
+        ? parseFloat(price - price * discount).toFixed(2)
+        : parseFloat(price).toFixed(2),
+    [price, discount]
+  );
   const handleAdd = () => {
     setProductCount((count) => {
       if (count < MAXIMUM_QUANTITY) return count + 1;
@@ -26,28 +44,53 @@ export default function ProductDetail() {
         : parseInt(v)
     );
   };
+  const handleAddToCart = () => {
+    const product = {
+      id: id,
+      image: image,
+      title: title,
+      amount: discounted_amount,
+      count: productCount,
+      total: discounted_amount * productCount,
+    };
+    const { cartproducts } = state;
+    const product_to_update = [...cartproducts].find((p) => p.id === id);
+    if (product_to_update) {
+      product_to_update.count = product_to_update.count + productCount;
+      product_to_update.total =
+        product_to_update.total + discounted_amount * productCount;
+    }
+    dispatch({
+      type: "additemtocart",
+      cartproducts: product_to_update
+        ? [product_to_update]
+        : [...state.cartproducts, product],
+    });
+  };
 
   return (
     <div className="p-8">
       <h4 className="mb-4 uppercase text-ui-orange font-bold text-sm tracking-[.075rem]">
-        Sneaker Company
+        {companyname}
       </h4>
       <h1 className="text-ui-very-dark-blue text-4xl font-bold mb-10">
-        Fall Limited Edition Sneakers
+        {title}
       </h1>
-      <p className="text-ui-dark-grayish-blue mb-8">
-        These low-profile sneakers are your perfect casual wear companion.
-        Featuring a durable rubber outer sole, they’ll withstand everything the
-        weather can offer.
-      </p>
+      <p className="text-ui-dark-grayish-blue mb-8">{description}</p>
       <div className="flex flex-col max-md:flex-row max-md:items-center max-md:justify-between">
         <h2 className="mb-2 text-3xl text-ui-very-dark-blue font-bold flex items-center gap-3">
-          <span>$125.00</span>
-          <Badge className="bg-ui-pale-orange text-ui-orange px-[8px]">
-            <span className="text-sm">50%</span>
-          </Badge>
+          <span>${discounted_amount}</span>
+          {discount && (
+            <Badge className="bg-ui-pale-orange text-ui-orange px-[8px]">
+              <span className="text-sm">{discount * 100}%</span>
+            </Badge>
+          )}
         </h2>
-        <span className="text-ui-grayish-blue line-through font-bold max-md:text-lg">$250.00</span>
+        {discount && (
+          <span className="text-ui-grayish-blue line-through font-bold max-md:text-lg">
+            ${parseFloat(price).toFixed(2)}
+          </span>
+        )}
       </div>
       <div className="px-4 flex justify-center items-center max-md:flex-col max-md:gap-1 gap-4 mt-8">
         <div className="max-md:w-full flex-[2] my-2 bg-ui-light-grayish-blue rounded-lg p-[.95rem] flex justify-between items-center gap-2">
@@ -64,7 +107,10 @@ export default function ProductDetail() {
             <img src={plus_src} alt="plus logo" />
           </button>
         </div>
-        <Button className="max-md:w-full shadow-xl shadow-ui-pale-orange flex-[4] py-[.5rem] bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-md [&>span]:font-bold">
+        <Button
+          onClick={handleAddToCart}
+          className="max-md:w-full shadow-xl shadow-ui-pale-orange flex-[4] py-[.5rem] bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-md [&>span]:font-bold"
+        >
           <svg
             className="mr-2"
             width="22"
