@@ -1,6 +1,5 @@
 import { Badge, Button, Dropdown } from "flowbite-react";
 import { useContext, useMemo, useState } from "react";
-import imgitem from "../../images/image-product-1.jpg";
 import icondelete from "../../images/icon-delete.svg";
 import GlobalStateContext from "../../store/context/GlobalStateContext";
 
@@ -63,23 +62,23 @@ export default function Basket() {
       </Dropdown.Header>
       <div className="w-[350px] max-md:w-full">
         {totalitems > 0 ? (
-          cartproducts.map((product) => (
-            <div key={product.id}>
+          cartproducts.map(({ id, image, title, amount, count, total }) => (
+            <div key={id}>
               <div className="px-5 py-4 flex justify-between items-center">
                 <div className="flex gap-4">
                   <img
                     className="rounded"
-                    src={imgitem}
+                    src={image}
                     alt="img product"
                     width={50}
                     height={50}
                   />
                   <div className="text-ui-dark-grayish-blue">
-                    <p>Fall Limited Edition Sneakers</p>
+                    <p>{title}</p>
                     <p>
-                      $125.00 x 3{" "}
+                      {`$${amount} x ${count} `}
                       <span className="font-bold text-ui-very-dark-blue">
-                        $375.00
+                        ${parseFloat(total).toFixed(2)}
                       </span>
                     </p>
                   </div>
@@ -104,7 +103,9 @@ export default function Basket() {
           ))
         ) : (
           <div className="px-5 py-16 flex justify-center items-center">
-            <h2 className="text-md text-ui-dark-grayish-blue font-bold">Your cart is empty.</h2>
+            <h2 className="text-md text-ui-dark-grayish-blue font-bold">
+              Your cart is empty.
+            </h2>
           </div>
         )}
       </div>

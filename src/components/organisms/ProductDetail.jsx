@@ -56,9 +56,8 @@ export default function ProductDetail({
     const { cartproducts } = state;
     const product_to_update = [...cartproducts].find((p) => p.id === id);
     if (product_to_update) {
-      product_to_update.count = product_to_update.count + productCount;
-      product_to_update.total =
-        product_to_update.total + discounted_amount * productCount;
+      product_to_update.count += productCount;
+      product_to_update.total += discounted_amount * productCount;
     }
     dispatch({
       type: "additemtocart",
