@@ -9,8 +9,8 @@ export function globalState(state, action) {
         return { ...state, zindexhidden: action.zindexhidden };
       case "additemtocart":
         return { ...state, cartproducts: action.cartproducts };
-      case "multiple":
-        return { ...state, ...action };
+      case "clearCart":
+        return { ...state, cartproducts: [] };
       default:
         return state;
     }

@@ -14,6 +14,11 @@ export default function Basket() {
       zindexhidden: [...menu.classList].includes("opacity-0"),
     });
   };
+  const handleClearCart = () => {
+    dispatch({
+      type: "clearCart",
+    });
+  }
   console.log(state)
   return (
     <Dropdown
@@ -71,7 +76,7 @@ export default function Basket() {
         </button>
       </div>
       <div className="px-5 py-3">
-        <Button className="py-1 w-full bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-xs [&>span]:font-bold">
+        <Button onClick={handleClearCart} className="py-1 w-full bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-xs [&>span]:font-bold">
           CheckOut
         </Button>
       </div>
