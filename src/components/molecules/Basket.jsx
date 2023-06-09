@@ -1,12 +1,20 @@
 import { Badge, Button, Dropdown } from "flowbite-react";
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import imgitem from "../../images/image-product-1.jpg";
 import icondelete from "../../images/icon-delete.svg";
 import GlobalStateContext from "../../store/context/GlobalStateContext";
 
 export default function Basket() {
   const [state, dispatch] = useContext(GlobalStateContext);
+  const { cartproducts } = state;
   const [bcolor, setBcolor] = useState("#69707D");
+  const totalitems = useMemo(
+    () =>
+      cartproducts.length > 0
+        ? cartproducts.reduce((p, n) => p + n.count, 0)
+        : 0,
+    [cartproducts]
+  );
   const handleActiveMenu = () => {
     const menu = document.querySelector(".dropdown-basket");
     dispatch({
@@ -18,20 +26,21 @@ export default function Basket() {
     dispatch({
       type: "clearCart",
     });
-  }
-  console.log(state)
+  };
   return (
     <Dropdown
       arrowIcon={false}
       inline
       label={
         <div className="relative" onClick={handleActiveMenu}>
-          <Badge
-            color="info"
-            className="px-[8px] py-[1px] text-[10px] absolute -top-3 -right-3 rounded-full bg-ui-orange text-white"
-          >
-            3
-          </Badge>
+          {totalitems > 0 && (
+            <Badge
+              color="info"
+              className="px-[8px] py-[1px] text-[10px] absolute -top-3 -right-3 rounded-full bg-ui-orange text-white"
+            >
+              {totalitems}
+            </Badge>
+          )}
           <svg
             onMouseEnter={() => setBcolor("hsl(220, 13%, 13%)")}
             onMouseLeave={() => setBcolor("#69707D")}
@@ -47,40 +56,57 @@ export default function Basket() {
           </svg>
         </div>
       }
-      className="w-[350px] max-md:w-[95%] rounded-lg shadow-lg border-none dropdown-basket"
+      className="max-md:w-[95%] rounded-lg shadow-lg border-none dropdown-basket"
     >
       <Dropdown.Header className="font-bold py-3">
         <h1>Cart</h1>
       </Dropdown.Header>
-      <div className="px-5 py-4 flex justify-between items-center">
-        <div className="flex gap-4">
-          <img
-            className="rounded"
-            src={imgitem}
-            alt="img product"
-            width={50}
-            height={50}
-          />
-          <div className="text-ui-dark-grayish-blue">
-            <p>Fall Limited Edition Sneakers</p>
-            <p>
-              $125.00 x 3{" "}
-              <span className="font-bold text-ui-very-dark-blue">$375.00</span>
-            </p>
+      <div className="w-[350px] max-md:w-full">
+        {totalitems > 0 ? (
+          cartproducts.map((product) => (
+            <div key={product.id}>
+              <div className="px-5 py-4 flex justify-between items-center">
+                <div className="flex gap-4">
+                  <img
+                    className="rounded"
+                    src={imgitem}
+                    alt="img product"
+                    width={50}
+                    height={50}
+                  />
+                  <div className="text-ui-dark-grayish-blue">
+                    <p>Fall Limited Edition Sneakers</p>
+                    <p>
+                      $125.00 x 3{" "}
+                      <span className="font-bold text-ui-very-dark-blue">
+                        $375.00
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <button>
+                  <img
+                    className="hover:contrast-50"
+                    src={icondelete}
+                    alt="delete icon"
+                  />
+                </button>
+              </div>
+              <div className="px-5 py-3">
+                <Button
+                  onClick={handleClearCart}
+                  className="py-1 w-full bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-xs [&>span]:font-bold"
+                >
+                  CheckOut
+                </Button>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="px-5 py-16 flex justify-center items-center">
+            <h2 className="text-md text-ui-dark-grayish-blue font-bold">Your cart is empty.</h2>
           </div>
-        </div>
-        <button>
-          <img
-            className="hover:contrast-50"
-            src={icondelete}
-            alt="delete icon"
-          />
-        </button>
-      </div>
-      <div className="px-5 py-3">
-        <Button onClick={handleClearCart} className="py-1 w-full bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-xs [&>span]:font-bold">
-          CheckOut
-        </Button>
+        )}
       </div>
     </Dropdown>
   );
