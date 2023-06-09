@@ -91,8 +91,8 @@ export default function ProductDetail({
           </span>
         )}
       </div>
-      <div className="px-4 flex justify-center items-center max-md:flex-col max-md:gap-1 gap-4 mt-8">
-        <div className="max-md:w-full flex-[2] my-2 bg-ui-light-grayish-blue rounded-lg p-[.95rem] flex justify-between items-center gap-2">
+      <div className="px-4 flex justify-center items-center max-xl:flex-col max-xl:gap-1 gap-4 mt-8">
+        <div className="max-xl:w-full flex-[2] my-2 bg-ui-light-grayish-blue rounded-lg p-[.95rem] flex justify-between items-center gap-2">
           <button className="p-1 hover:opacity-50" onClick={handleReduce}>
             <img src={minus_src} alt="minus logo" />
           </button>
@@ -108,7 +108,7 @@ export default function ProductDetail({
         </div>
         <Button
           onClick={handleAddToCart}
-          className="max-md:w-full shadow-xl shadow-ui-pale-orange flex-[4] py-[.5rem] bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-md [&>span]:font-bold"
+          className="max-xl:w-full shadow-xl shadow-ui-pale-orange flex-[4] py-[.5rem] bg-ui-orange hover:bg-ui-orange hover:opacity-80 transition-opacity my-2 focus:ring-transparent [&>span]:text-md [&>span]:font-bold"
         >
           <svg
             className="mr-2"
