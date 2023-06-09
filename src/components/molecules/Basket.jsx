@@ -47,25 +47,27 @@ export default function Basket() {
           </svg>
         </div>
       }
-      className="w-[325px] max-md:w-[95%] rounded-lg shadow-lg border-none dropdown-basket"
+      className="w-[350px] max-md:w-[95%] rounded-lg shadow-lg border-none dropdown-basket"
     >
       <Dropdown.Header className="font-bold py-3">
         <h1>Cart</h1>
       </Dropdown.Header>
-      <div className="px-5 py-4 flex gap-4 items-center">
-        <img
-          className="rounded"
-          src={imgitem}
-          alt="img product"
-          width={50}
-          height={50}
-        />
-        <div className="text-ui-dark-grayish-blue">
-          <p>Fall Limited Edition Sneakers</p>
-          <p>
-            $125.00 x 3{" "}
-            <span className="font-bold text-ui-very-dark-blue">$375.00</span>
-          </p>
+      <div className="px-5 py-4 flex justify-between items-center">
+        <div className="flex gap-4">
+          <img
+            className="rounded"
+            src={imgitem}
+            alt="img product"
+            width={50}
+            height={50}
+          />
+          <div className="text-ui-dark-grayish-blue">
+            <p>Fall Limited Edition Sneakers</p>
+            <p>
+              $125.00 x 3{" "}
+              <span className="font-bold text-ui-very-dark-blue">$375.00</span>
+            </p>
+          </div>
         </div>
         <button>
           <img
