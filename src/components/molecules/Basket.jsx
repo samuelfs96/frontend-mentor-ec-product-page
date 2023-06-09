@@ -21,6 +21,12 @@ export default function Basket() {
       zindexhidden: [...menu.classList].includes("opacity-0"),
     });
   };
+  const handleDeleteItem = (id) => {
+    dispatch({
+      type: "removeitemfromcart",
+      cartproducts: cartproducts.filter(p => p.id !== id),
+    });
+  }
   const handleClearCart = () => {
     dispatch({
       type: "clearCart",
@@ -83,7 +89,7 @@ export default function Basket() {
                     </p>
                   </div>
                 </div>
-                <button>
+                <button onClick={() => handleDeleteItem(id)}>
                   <img
                     className="hover:contrast-50"
                     src={icondelete}
